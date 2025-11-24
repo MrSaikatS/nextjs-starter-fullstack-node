@@ -50,9 +50,6 @@ A production-ready Next.js starter template for fullstack development with moder
 
    # Or using npm
    npm install
-
-   # Or using pnpm
-   pnpm install
    ```
 
 3. Start the development server:
@@ -63,9 +60,6 @@ A production-ready Next.js starter template for fullstack development with moder
 
    # Or using npm
    npm run dev
-
-   # Or using pnpm
-   pnpm dev
    ```
 
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -82,13 +76,13 @@ A production-ready Next.js starter template for fullstack development with moder
 - `bun lint` - Run ESLint
 - `bun prod` - Lint, build, and start production server
 
-#### Using npm/pnpm
+#### Using npm
 
-- `npm run dev` or `pnpm dev` - Start the development server with Turbopack
-- `npm run build` or `pnpm build` - Build for production with Turbopack
-- `npm start` or `pnpm start` - Start production server
-- `npm run lint` or `pnpm lint` - Run ESLint
-- `npm run prod` or `pnpm prod` - Lint, build, and start production server
+- `npm run dev` - Start the development server with Turbopack
+- `npm run build` - Build for production with Turbopack
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run prod` - Lint, build, and start production server
 
 ## 📁 Project Structure
 
@@ -149,7 +143,7 @@ npx shadcn@latest add card
 - **Theme**: next-themes
 - **Image Optimization**: sharp
 - **Code Quality**: ESLint, Prettier
-- **Package Manager**: Bun/npm/pnpm support
+- **Package Manager**: Bun/npm support
 
 ## 🔧 Configuration
 
@@ -177,3 +171,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Built with ❤️ by [Saikat Sardar](https://github.com/MrSaikatS)
+
+[![GitHub stars](https://img.shields.io/github/stars/MrSaikatS/nextjs-starter-fullstack-node?style=social)](https://github.com/MrSaikatS/nextjs-starter-fullstack-node/stargazers) [![GitHub forks](https://img.shields.io/github/forks/MrSaikatS/nextjs-starter-fullstack-node?style=social)](https://github.com/MrSaikatS/nextjs-starter-fullstack-node/network/members)
