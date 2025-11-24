@@ -121,17 +121,9 @@ The theming system supports both light and dark modes with smooth transitions an
 This starter is pre-configured for shadcn/ui components:
 
 - **Components.json**: Configured with New York style preset
-- **Path aliases**: Ready for component installation (`@/components/ui`)
+- **Path aliases**: Ready for component installation (`@/components/shadcnui`)
 - **Theme system**: Integrated with Tailwind CSS variables
 - **Icon library**: Lucide React icons configured
-
-Install components easily:
-
-```bash
-npx shadcn@latest add button
-npx shadcn@latest add card
-# ... and more
-```
 
 ## 🚀 Tech Stack
 
