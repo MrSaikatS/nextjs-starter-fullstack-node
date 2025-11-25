@@ -11,6 +11,8 @@ A production-ready Next.js starter template for fullstack development with moder
 - 🎨 **Tailwind CSS v4** with modern CSS variables and theming system
   - 🌓 Built-in Dark/Light Mode with `next-themes`
   - 🎨 Comprehensive design system with CSS custom properties
+  - 🛠️ **Styling Utilities**: `clsx`, `tailwind-merge`, and `class-variance-authority` for component styling
+  - 🎬 **Animation Support**: `tw-animate-css` for Tailwind CSS animations
 - ✨ **Lucide React Icons** for beautiful, consistent icons
 - 🛠 **TypeScript** for full type safety
 - 🎯 **React 19.2** with latest features and optimizations
@@ -23,7 +25,7 @@ A production-ready Next.js starter template for fullstack development with moder
 - 🎭 **Theme Toggle Component** with smooth transitions
 - 📱 **Responsive Layout** with fixed header navigation
 - 🗄️ **Database Integration** with Prisma and SQLite
-  - 🚀 **Better SQLite3 Adapter** for optimal performance
+  - 🚀 **libsql Adapter** for optimal performance
   - 📝 **Type-safe Database Access** with generated Prisma Client
   - 🔧 **Environment Configuration** with proper validation
   - 📊 **Prisma Studio** for database management
@@ -91,6 +93,14 @@ A production-ready Next.js starter template for fullstack development with moder
 
 ## 🛠 Development
 
+### Development Workflow
+
+1. **Environment Setup**: Copy `.env.example` to `.env` and configure your database URL
+2. **Database Setup**: Run `bun migrate` to create the database schema and generate the Prisma client
+3. **Start Development**: Use `bun dev` for the fastest development experience with Turbopack
+4. **Database Management**: Use `bun studio` to open Prisma Studio for visual database inspection
+5. **Code Quality**: Run `bun lint` before committing changes
+
 ### Available Scripts
 
 #### Using Bun (recommended)
@@ -131,11 +141,12 @@ src/
 ├── hooks/
 │   └── .gitkeep
 └── lib/
-    ├── dbClient.ts          # Prisma database client
-    ├── env/                 # Environment configuration
-    │   ├── clientEnv.ts     # Client-side environment variables
-    │   └── serverEnv.ts     # Server-side environment variables
-    └── utils.ts             # Utility functions (cn helper)
+    ├── database/
+    │   └── dbClient.ts        # Prisma database client
+    ├── env/                   # Environment configuration
+    │   ├── clientEnv.ts       # Client-side environment variables
+    │   └── serverEnv.ts       # Server-side environment variables
+    └── utils.ts               # Utility functions (cn helper)
 
 prisma/
 ├── schema.prisma            # Database schema definition
@@ -155,7 +166,7 @@ This project uses **Prisma** with **SQLite** for type-safe database operations:
 
 ### Database Setup
 
-- **Database Provider**: SQLite with Better SQLite3 Adapter for optimal performance
+- **Database Provider**: SQLite with libsql Adapter for optimal performance
 - **Schema Management**: Prisma migrations for version control
 - **Type Safety**: Auto-generated TypeScript client
 - **Development**: Prisma Studio for visual database management
@@ -167,7 +178,7 @@ The project uses a structured approach to environment variables:
 - **`.env.example`**: Template for required environment variables
 - **`src/lib/env/clientEnv.ts`**: Client-side environment variables with type safety
 - **`src/lib/env/serverEnv.ts`**: Server-side environment variables with validation
-- **`src/lib/dbClient.ts`**: Singleton Prisma client instance with Better SQLite3 adapter
+- **`src/lib/database/dbClient.ts`**: Singleton Prisma client instance with libsql adapter
 
 ### Database Operations
 
@@ -188,7 +199,7 @@ Edit `prisma/schema.prisma` to define your database models. After changes:
 
 1. Run `bun migrate` to create a new migration
 2. The Prisma client will be automatically regenerated
-3. Use the generated client in `src/lib/dbClient.ts` for type-safe database access
+3. Use the generated client in `src/lib/database/dbClient.ts` for type-safe database access
 
 ## 🎨 Theming
 
@@ -215,7 +226,7 @@ This starter is pre-configured for shadcn/ui components:
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
-- **Database**: Prisma with SQLite (Better SQLite3 Adapter)
+- **Database**: Prisma with SQLite (libsql Adapter)
 - **UI Components**: shadcn/ui (ready)
 - **Icons**: Lucide React
 - **Theme**: next-themes
@@ -232,7 +243,7 @@ This starter is pre-configured for shadcn/ui components:
 - **Path Aliases**: `@/*` mapped to `./src/*`
 - **Component Aliases**: Pre-configured for shadcn/ui
 - **Theme System**: Full CSS variable integration
-- **Database**: Prisma with Better SQLite3 adapter
+- **Database**: Prisma with libsql adapter
 - **Environment**: Structured client/server environment variables
 - **Validation**: Zod schemas for environment validation
 
@@ -272,7 +283,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Lucide Icons](https://lucide.dev/)
 - [React Documentation](https://react.dev/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
-- [Better SQLite3](https://github.com/WiseLibs/better-sqlite3)
 
 ---
 
