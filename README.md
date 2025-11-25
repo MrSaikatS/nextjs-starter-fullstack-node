@@ -1,6 +1,6 @@
 # Next.js Starter Fullstack Node
 
-A production-ready Next.js starter template for fullstack development with modern tooling and best practices out of the box. Built with TypeScript, Tailwind CSS v4, and Next.js App Router.
+A production-ready Next.js starter template for fullstack development with modern tooling and best practices out of the box. Built with TypeScript, Tailwind CSS v4, Next.js App Router, and complete database integration with Prisma and SQLite.
 
 ## ✨ Features
 
@@ -22,6 +22,11 @@ A production-ready Next.js starter template for fullstack development with moder
 - 🔍 **ESLint** and **Prettier** for code quality
 - 🎭 **Theme Toggle Component** with smooth transitions
 - 📱 **Responsive Layout** with fixed header navigation
+- 🗄️ **Database Integration** with Prisma and SQLite
+  - 🚀 **Better SQLite3 Adapter** for optimal performance
+  - 📝 **Type-safe Database Access** with generated Prisma Client
+  - 🔧 **Environment Configuration** with proper validation
+  - 📊 **Prisma Studio** for database management
 
 ## 🚀 Getting Started
 
@@ -31,7 +36,7 @@ A production-ready Next.js starter template for fullstack development with moder
 - npm 11.x or later (included with Node.js)
 - Git for version control
 
-> **Note:** This project uses Next.js 16 with React 19.2, featuring stable Turbopack (2-5× faster builds) and React Compiler for optimal development experience.
+> **Note:** This project uses Next.js 16 with React 19.2, featuring stable Turbopack (2-5× faster builds), React Compiler for optimal development experience, and complete database integration with Prisma and SQLite for fullstack development.
 
 ### Installation
 
@@ -42,7 +47,15 @@ A production-ready Next.js starter template for fullstack development with moder
    cd nextjs-starter-fullstack-node
    ```
 
-2. Install dependencies (using Bun is recommended for faster installation):
+2. Set up environment variables:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   The default configuration uses SQLite with a local database file. You can modify the `DATABASE_URL` in `.env` if needed.
+
+3. Install dependencies (using Bun is recommended for faster installation):
 
    ```bash
    # Using Bun (recommended)
@@ -52,7 +65,19 @@ A production-ready Next.js starter template for fullstack development with moder
    npm install
    ```
 
-3. Start the development server:
+4. Set up the database:
+
+   ```bash
+   # Using Bun
+   bun migrate
+
+   # Or using npm
+   npm run migrate
+   ```
+
+   This command will create the database schema and generate the Prisma client.
+
+5. Start the development server:
 
    ```bash
    # Using Bun (recommended for faster development)
@@ -62,7 +87,7 @@ A production-ready Next.js starter template for fullstack development with moder
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## 🛠 Development
 
@@ -71,18 +96,22 @@ A production-ready Next.js starter template for fullstack development with moder
 #### Using Bun (recommended)
 
 - `bun dev` - Start the development server with Turbopack (2-5× faster builds, up to 10× faster Fast Refresh)
-- `bun build` - Build for production with Turbopack
-- `bun start` - Start production server
+- `bun build` - Build for production with Prisma client generation and Turbopack
+- `bun start` - Start production server (for production deployment)
 - `bun lint` - Run ESLint
-- `bun prod` - Lint, build, and start production server
+- `bun prod` - Test production locally (lint, build with Prisma generation, and start production server)
+- `bun migrate` - Run Prisma migrations and generate client
+- `bun studio` - Open Prisma Studio for database management
 
 #### Using npm
 
 - `npm run dev` - Start the development server with Turbopack
-- `npm run build` - Build for production with Turbopack
-- `npm start` - Start production server
+- `npm run build` - Build for production with Prisma client generation and Turbopack
+- `npm start` - Start production server (for production deployment)
 - `npm run lint` - Run ESLint
-- `npm run prod` - Lint, build, and start production server
+- `npm run prod` - Test production locally (lint, build with Prisma generation, and start production server)
+- `npm run migrate` - Run Prisma migrations and generate client
+- `npm run studio` - Open Prisma Studio for database management
 
 ## 📁 Project Structure
 
@@ -102,8 +131,64 @@ src/
 ├── hooks/
 │   └── .gitkeep
 └── lib/
+    ├── dbClient.ts          # Prisma database client
+    ├── env/                 # Environment configuration
+    │   ├── clientEnv.ts     # Client-side environment variables
+    │   └── serverEnv.ts     # Server-side environment variables
     └── utils.ts             # Utility functions (cn helper)
+
+prisma/
+├── schema.prisma            # Database schema definition
+└── dev.db                   # SQLite database file (generated)
+
+generated/
+└── prisma/                  # Generated Prisma client
+    └── client/              # Type-safe database client
+
+.env.example                 # Environment variables template
+.env                         # Local environment variables (gitignored)
 ```
+
+## 🗄️ Database
+
+This project uses **Prisma** with **SQLite** for type-safe database operations:
+
+### Database Setup
+
+- **Database Provider**: SQLite with Better SQLite3 Adapter for optimal performance
+- **Schema Management**: Prisma migrations for version control
+- **Type Safety**: Auto-generated TypeScript client
+- **Development**: Prisma Studio for visual database management
+
+### Environment Configuration
+
+The project uses a structured approach to environment variables:
+
+- **`.env.example`**: Template for required environment variables
+- **`src/lib/env/clientEnv.ts`**: Client-side environment variables with type safety
+- **`src/lib/env/serverEnv.ts`**: Server-side environment variables with validation
+- **`src/lib/dbClient.ts`**: Singleton Prisma client instance with Better SQLite3 adapter
+
+### Database Operations
+
+```bash
+# Create and run migrations
+bun migrate  # or npm run migrate
+
+# Generate Prisma client (included in migrate command)
+prisma generate
+
+# Open Prisma Studio for database management
+bun studio  # or npm run studio
+```
+
+### Schema Customization
+
+Edit `prisma/schema.prisma` to define your database models. After changes:
+
+1. Run `bun migrate` to create a new migration
+2. The Prisma client will be automatically regenerated
+3. Use the generated client in `src/lib/dbClient.ts` for type-safe database access
 
 ## 🎨 Theming
 
@@ -130,12 +215,15 @@ This starter is pre-configured for shadcn/ui components:
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
+- **Database**: Prisma with SQLite (Better SQLite3 Adapter)
 - **UI Components**: shadcn/ui (ready)
 - **Icons**: Lucide React
 - **Theme**: next-themes
 - **Image Optimization**: sharp
 - **Code Quality**: ESLint, Prettier
 - **Package Manager**: Bun/npm support
+- **Environment**: Type-safe environment variables
+- **Validation**: Zod for schema validation
 
 ## 🔧 Configuration
 
@@ -144,6 +232,28 @@ This starter is pre-configured for shadcn/ui components:
 - **Path Aliases**: `@/*` mapped to `./src/*`
 - **Component Aliases**: Pre-configured for shadcn/ui
 - **Theme System**: Full CSS variable integration
+- **Database**: Prisma with Better SQLite3 adapter
+- **Environment**: Structured client/server environment variables
+- **Validation**: Zod schemas for environment validation
+
+## 📝 Environment Variables
+
+The project uses a structured approach to environment configuration:
+
+### Required Variables
+
+```bash
+# Database
+DATABASE_URL="file:./prisma/dev.db"  # SQLite database path
+```
+
+### Environment Structure
+
+- **Client Variables**: Accessible in browser (defined in `src/lib/env/clientEnv.ts`)
+- **Server Variables**: Server-side only (defined in `src/lib/env/serverEnv.ts`)
+- **Type Safety**: All environment variables are validated with Zod schemas
+
+Copy `.env.example` to `.env` and modify as needed for your environment.
 
 ## 🤝 Contributing
 
@@ -157,8 +267,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Lucide Icons](https://lucide.dev/)
+- [React Documentation](https://react.dev/)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [Better SQLite3](https://github.com/WiseLibs/better-sqlite3)
 
 ---
 

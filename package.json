@@ -8,6 +8,7 @@
 		"build": "prisma generate && next build",
 		"start": "next start",
 		"lint": "eslint",
+		"prod": "prisma generate && eslint && next build && next start",
 		"migrate": "prisma migrate dev && prisma generate",
 		"studio": "prisma studio --browser none"
 	},
@@ -23,7 +24,8 @@
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"sharp": "^0.34.5",
-		"tailwind-merge": "^3.4.0"
+		"tailwind-merge": "^3.4.0",
+		"zod": "^4.1.13"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.17",
