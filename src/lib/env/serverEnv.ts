@@ -1,7 +1,7 @@
 import z from "zod";
 
 const serverEnvSchema = z.object({
-	DATABASE_URL: z.string(),
+	DATABASE_URL: z.string().min(1, { error: "DATABASE_URL is required" }),
 });
 
 const serverEnvVars = {
