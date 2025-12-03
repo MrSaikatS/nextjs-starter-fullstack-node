@@ -129,8 +129,8 @@ A production-ready Next.js starter template for fullstack development with moder
 src/
 ├── app/
 │   ├── globals.css          # Global styles with Tailwind CSS v4
-│   ├── layout.tsx           # Root layout with ThemeProvider
-│   └── page.tsx             # Home page
+│   ├── layout.tsx           # Root layout with ThemeProvider and Header
+│   └── page.tsx             # Home page with main content
 ├── components/
 │   ├── Header/
 │   │   └── Header.tsx       # Navigation header
@@ -139,13 +139,13 @@ src/
 │   ├── ThemeToggleButton.tsx # Dark/light mode toggle
 │   └── shadcnui/            # shadcn/ui components (ready for installation)
 ├── hooks/
-│   └── .gitkeep
+│   └── .gitkeep             # Ready for custom hooks
 └── lib/
     ├── database/
-    │   └── dbClient.ts        # Prisma database client
+    │   └── dbClient.ts        # Prisma database client with libsql adapter
     ├── env/                   # Environment configuration
     │   ├── clientEnv.ts       # Client-side environment variables
-    │   └── serverEnv.ts       # Server-side environment variables
+    │   └── serverEnv.ts       # Server-side environment variables with Zod validation
     └── utils.ts               # Utility functions (cn helper)
 
 prisma/
