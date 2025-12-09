@@ -1,0 +1,6 @@
+# Git Directory Preservation File
+
+This file ensures the `server` directory is tracked by Git, as Git does not track empty directories.
+
+## Directory Purpose
+The `server` directory contains all server action function files that handle server-side operations and API endpoints.
