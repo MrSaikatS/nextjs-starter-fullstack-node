@@ -3,17 +3,17 @@ import { PrismaClient } from "../../../generated/prisma/client";
 import { serverEnv } from "../env/serverEnv";
 
 const globalForPrisma = globalThis as unknown as {
-	prisma?: PrismaClient;
+  prisma?: PrismaClient;
 };
 
 const adapter = new PrismaLibSql({
-	url: serverEnv.DATABASE_URL,
+  url: serverEnv.DATABASE_URL,
 });
 
 const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== "production") {
-	globalForPrisma.prisma = prisma;
+  globalForPrisma.prisma = prisma;
 }
 
 export default prisma;
