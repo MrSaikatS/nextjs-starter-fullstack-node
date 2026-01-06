@@ -1,5 +1,8 @@
 import Link from "next/link";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
+import ResponsiveToggleNav from "./ResponsiveToggleNav";
 
 const Header = () => {
   return (
@@ -15,11 +18,15 @@ const Header = () => {
           </h1>
         </Link>
 
-        <nav className="flex items-center gap-4">
-          <Link href={"/"}>Home</Link>
+        <div className="flex items-center gap-4">
+          <ResponsiveToggleNav>
+            <MobileNav />
+
+            <DesktopNav />
+          </ResponsiveToggleNav>
 
           <ThemeToggleButton />
-        </nav>
+        </div>
       </div>
     </header>
   );
