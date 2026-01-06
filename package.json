@@ -15,6 +15,7 @@
   "dependencies": {
     "@prisma/adapter-libsql": "^7.2.0",
     "@prisma/client": "^7.2.0",
+    "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
