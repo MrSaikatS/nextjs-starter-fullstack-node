@@ -1,36 +1,38 @@
 "use client";
 
-import { ReactNode, useSyncExternalStore } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 type ResponsiveToggleNavProps = {
   children: [ReactNode, ReactNode]; // [MobileNav, DesktopNav]
 };
 
-const subscribe = (callback: () => void) => {
-  const screenQuery = window.matchMedia("(max-width: 768px)");
-  screenQuery.addEventListener("change", callback);
-  return () => screenQuery.removeEventListener("change", callback);
-};
-
-const getSnapshot = () => {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(max-width: 768px)").matches;
-};
-
-const getServerSnapshot = () => false;
-
 const ResponsiveToggleNav = ({ children }: ResponsiveToggleNavProps) => {
-  const isMobile = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  // Initialize with null to indicate "not yet determined"
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-  if (isMobile) {
-    return <div className="block md:hidden">{children[0]}</div>;
+  useEffect(() => {
+    const screenQuery = window.matchMedia("(max-width: 768px)");
+
+    const handleScreenChange = () => {
+      setIsMobile(screenQuery.matches);
+    };
+
+    // Set initial value
+    handleScreenChange();
+
+    screenQuery.addEventListener("change", handleScreenChange);
+
+    return () => screenQuery.removeEventListener("change", handleScreenChange);
+  }, []);
+
+  // During SSR and initial hydration, render mobile nav (default)
+  // This prevents hydration mismatch
+  if (isMobile === null) {
+    return children[0]; // Mobile nav as default
   }
 
-  return <div className="hidden md:block">{children[1]}</div>;
+  // After hydration, show correct nav based on screen size
+  return isMobile ? children[0] : children[1];
 };
 
 export default ResponsiveToggleNav;
