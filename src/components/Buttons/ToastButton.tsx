@@ -7,7 +7,7 @@ const ToastButton = () => {
   return (
     <Button
       onClick={() => toast.success("Hello there 👋🏻")}
-      className="cursor-pointer">
+      size={"lg"}>
       Click Me!
     </Button>
   );

@@ -15,11 +15,12 @@ A production-ready Next.js starter template for fullstack development with moder
   - 🎬 **Animation Support**: `tw-animate-css` for Tailwind CSS animations
 - ✨ **Lucide React Icons** for beautiful, consistent icons
 - 🛠 **TypeScript** for full type safety
-- 🎯 **React 19.2** with latest features and optimizations
+- 🎯 **React 19** with latest features and optimizations
   - 🚀 **React Compiler Support (stable)** - Automatic memoization for better performance
 - 🧩 **shadcn/ui Ready** with components.json configuration
-  - 🎨 New York style preset
+  - 🎨 Base Nova style preset
   - 📦 Ready for component installation
+- 🎉 **Toast Notifications** with react-toastify integrated
 - 🖼️ **Image Optimization** with `sharp`
 - 🔍 **ESLint** and **Prettier** for code quality
 - 🎭 **Theme Toggle Component** with smooth transitions
@@ -37,8 +38,9 @@ A production-ready Next.js starter template for fullstack development with moder
 - Node.js 22.x (LTS recommended)
 - npm 11.x or later (included with Node.js)
 - Git for version control
+- Bun (recommended for faster package management)
 
-> **Note:** This project uses Next.js 16 with React 19.2, featuring stable Turbopack (2-5× faster builds), React Compiler for optimal development experience, and complete database integration with Prisma and SQLite for fullstack development.
+> **Note:** This project uses Next.js 16.1.5 with React 19.2.4, featuring stable Turbopack (2-5× faster builds), React Compiler for optimal development experience, complete database integration with Prisma and SQLite, and toast notifications with react-toastify for fullstack development.
 
 ### Installation
 
@@ -132,21 +134,26 @@ src/
 │   ├── layout.tsx           # Root layout with ThemeProvider and Header
 │   └── page.tsx             # Home page with main content
 ├── components/
+│   ├── Buttons/
+│   │   ├── ThemeToggleButton.tsx # Dark/light mode toggle
+│   │   └── ToastButton.tsx      # Toast notification demo button
 │   ├── Header/
 │   │   └── Header.tsx       # Navigation header
 │   ├── Providers/
-│   │   └── ThemeProvider.tsx # Theme configuration
-│   ├── ThemeToggleButton.tsx # Dark/light mode toggle
-│   └── shadcnui/            # shadcn/ui components (ready for installation)
+│   │   ├── ThemeProvider.tsx # Theme configuration
+│   │   └── ToastProvider.tsx # Toast container provider
+│   └── shadcnui/            # shadcn/ui components
+│       └── button.tsx       # Button component
 ├── hooks/
 │   └── .gitkeep             # Ready for custom hooks
-└── lib/
-    ├── database/
-    │   └── dbClient.ts        # Prisma database client with libsql adapter
-    ├── env/                   # Environment configuration
-    │   ├── clientEnv.ts       # Client-side environment variables
-    │   └── serverEnv.ts       # Server-side environment variables with Zod validation
-    └── utils.ts               # Utility functions (cn helper)
+├── lib/
+│   ├── database/
+│   │   └── dbClient.ts        # Prisma database client with libsql adapter
+│   ├── env/                   # Environment configuration
+│   │   ├── clientEnv.ts       # Client-side environment variables
+│   │   └── serverEnv.ts       # Server-side environment variables with Zod validation
+│   ├── fonts.ts               # Font configuration (Geist Sans/Mono)
+│   └── utils.ts               # Utility functions (cn helper)
 
 prisma/
 ├── schema.prisma            # Database schema definition
@@ -170,6 +177,7 @@ This project uses **Prisma** with **SQLite** for type-safe database operations:
 - **Schema Management**: Prisma migrations for version control
 - **Type Safety**: Auto-generated TypeScript client
 - **Development**: Prisma Studio for visual database management
+- **Client Output**: Generated in `generated/prisma/client` directory
 
 ### Environment Configuration
 
@@ -195,11 +203,12 @@ bun studio  # or npm run studio
 
 ### Schema Customization
 
-Edit `prisma/schema.prisma` to define your database models. After changes:
+The current `prisma/schema.prisma` contains a basic SQLite configuration with libsql adapter. To define your database models:
 
-1. Run `bun migrate` to create a new migration
-2. The Prisma client will be automatically regenerated
-3. Use the generated client in `src/lib/database/dbClient.ts` for type-safe database access
+1. Edit `prisma/schema.prisma` to add your models
+2. Run `bun migrate` to create a new migration
+3. The Prisma client will be automatically regenerated in `generated/prisma/client`
+4. Use the generated client in `src/lib/database/dbClient.ts` for type-safe database access
 
 ## 🎨 Theming
 
@@ -216,10 +225,11 @@ The theming system supports both light and dark modes with smooth transitions an
 
 This starter is pre-configured for shadcn/ui components:
 
-- **Components.json**: Configured with New York style preset
+- **Components.json**: Configured with Base Nova style preset
 - **Path aliases**: Ready for component installation (`@/components/shadcnui`)
 - **Theme system**: Integrated with Tailwind CSS variables
 - **Icon library**: Lucide React icons configured
+- **Button component**: Pre-installed as example shadcn/ui component
 
 ## 🚀 Tech Stack
 
