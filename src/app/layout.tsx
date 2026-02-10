@@ -4,11 +4,11 @@ import { geistMono, geistSans } from "@/lib/fonts";
 import { ReactNode } from "react";
 import "./globals.css";
 
-type RootLayoutProps = {
+type RootLayoutProps = Readonly<{
   children: ReactNode;
-};
+}>;
 
-const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html
       lang="en"
