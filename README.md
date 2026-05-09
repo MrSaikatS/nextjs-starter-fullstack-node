@@ -40,7 +40,7 @@ A production-ready Next.js starter template for fullstack development with moder
 - Git for version control
 - Bun (recommended for faster package management)
 
-> **Note:** This project uses Next.js 16.1.5 with React 19.2.4, featuring stable Turbopack (2-5× faster builds), React Compiler for optimal development experience, complete database integration with Prisma and SQLite, and toast notifications with react-toastify for fullstack development.
+> **Note:** This project uses Next.js 16.2.6 with React 19.2.6, featuring stable Turbopack (2-5× faster builds), React Compiler for optimal development experience, complete database integration with Prisma and SQLite, and toast notifications with react-toastify for fullstack development.
 
 ### Installation
 
@@ -140,24 +140,22 @@ src/
 │   ├── Header/
 │   │   └── Header.tsx       # Navigation header
 │   ├── Providers/
-│   │   ├── ThemeProvider.tsx # Theme configuration
-│   │   └── ToastProvider.tsx # Toast container provider
+│   │   ├── ThemeProvider.tsx # Theme configuration with ToastProvider integrated
 │   └── shadcnui/            # shadcn/ui components
 │       └── button.tsx       # Button component
-├── hooks/
-│   └── .gitkeep             # Ready for custom hooks
+├── hooks/                   # Ready for custom hooks
 ├── lib/
 │   ├── database/
 │   │   └── dbClient.ts        # Prisma database client with libsql adapter
 │   ├── env/                   # Environment configuration
 │   │   ├── clientEnv.ts       # Client-side environment variables
 │   │   └── serverEnv.ts       # Server-side environment variables with Zod validation
-│   ├── fonts.ts               # Font configuration (Geist Sans/Mono)
+│   └── fonts.ts               # Font configuration (Geist Sans)
 │   └── utils.ts               # Utility functions (cn helper)
 
 prisma/
 ├── schema.prisma            # Database schema definition
-└── dev.db                   # SQLite database file (generated)
+└── dev.db                   # SQLite database file (created after migration)
 
 generated/
 └── prisma/                  # Generated Prisma client
