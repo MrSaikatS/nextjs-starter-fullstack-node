@@ -150,7 +150,7 @@ src/
 │   ├── env/                   # Environment configuration
 │   │   ├── clientEnv.ts       # Client-side environment variables
 │   │   └── serverEnv.ts       # Server-side environment variables with Zod validation
-│   └── fonts.ts               # Font configuration (Geist Sans/Mono)
+│   └── fonts.ts               # Font configuration (Geist Sans)
 │   └── utils.ts               # Utility functions (cn helper)
 
 prisma/
