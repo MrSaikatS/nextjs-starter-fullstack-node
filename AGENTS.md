@@ -6,6 +6,44 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
+<!-- BEGIN:form-patterns -->
+
+# Form Patterns
+
+Schemas in `src/lib/zodSchema.ts` — export both schema and `type X = z.infer<typeof xSchema>`.
+
+Components use `"use client"`, `react-hook-form` + `@hookform/resolvers/zod`, and shadcn primitives:
+
+```typescript
+const { handleSubmit, control, formState: { isSubmitting } } = useForm({
+  resolver: zodResolver(mySchema),
+  defaultValues: { ... },
+  mode: "all",
+});
+```
+
+Each field goes through `Controller`:
+
+```typescript
+<Controller
+  name="fieldName"
+  control={control}
+  render={({ field, fieldState }) => (
+    <Field data-invalid={fieldState.invalid}>
+      <FieldLabel htmlFor={field.name}>Label</FieldLabel>
+      <Input {...field} id={field.name} aria-invalid={fieldState.invalid} autoComplete="..." />
+      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+    </Field>
+  )}
+/>
+```
+
+Submit: `<form onSubmit={handleSubmit(handler)} noValidate>`. Button disabled while submitting with icon toggle.
+
+See existing examples under `src/components/Auth/`.
+
+<!-- END:form-patterns -->
+
 ## Agent behavior
 
 - **Ask questions.** When the request is ambiguous, when there are real implementation choices with tradeoffs, or before any non-obvious / destructive action, use the `question` tool to confirm. Prefer one short batched question over back-and-forth guessing.
@@ -69,7 +107,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Package manager
 
-- `bun.lock` is committed; Bun is the primary workflow (`bun install`, `bun <script>`). npm works (engines pin `node >=22`, `npm >=11`) but the scripts and README are written around `bun`.
+- `bun.lock` is committed; Bun is the primary workflow (`bun install`, `bun <script>`). npm works (engines pin `node >=24`, `npm >=11`) but the scripts and README are written around `bun`.
 
 ## Misc
 
