@@ -17,7 +17,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Next.js 16.2 + React 19.2 (App Router, Turbopack default, React Compiler on, `typedRoutes` on)
 - Prisma 7 with `@prisma/adapter-libsql` (SQLite, file-backed)
 - Tailwind CSS v4 (CSS-only config in `globals.css`; no `tailwind.config.ts`)
-- shadcn/ui with the `base-nova` style preset; primitives from `@base-ui/react` (not Radix)
+- shadcn/ui with the `base-luma` style preset; primitives from `@base-ui/react` (not Radix)
 - `next-themes` (default `dark`, `enableSystem={false}`), `react-toastify`, `lucide-react`
 - `@t3-oss/env-nextjs` + Zod for env validation
 
@@ -49,13 +49,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Styling
 
 - Tailwind v4: all config lives in `src/app/globals.css` via `@theme` and `@custom-variant`. PostCSS plugin is `@tailwindcss/postcss`. There is no `tailwind.config.ts` — do not create one.
-- `globals.css` imports `shadcn/tailwind.css`; removing it breaks the Base Nova design tokens.
+- `globals.css` imports `shadcn/tailwind.css`; removing it breaks the Base Luma design tokens.
 - Prettier: `singleAttributePerLine: true`, `bracketSameLine: true`, `experimentalTernaries: true`, and `prettier-plugin-tailwindcss` is enabled. New code matches (one prop per line; JSX closing bracket on the same line as the tag).
 
 ## shadcn / Base UI
 
 - `components.json` sets `ui` → `@/components/shadcnui` (not the default `@/components/ui`). Add components with `bunx shadcn add ...`; they land in `src/components/shadcnui/`.
-- The shipped `Button` wraps `Button as ButtonPrimitive` from `@base-ui/react/button`. Do not introduce Radix or `react-aria` primitives — they don't share the Base Nova styling.
+- The shipped `Button` wraps `Button as ButtonPrimitive` from `@base-ui/react/button`. Do not introduce Radix or `react-aria` primitives — they don't share the Base Luma styling.
 
 ## Path aliases (`tsconfig.json`)
 
