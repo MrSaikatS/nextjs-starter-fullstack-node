@@ -1,6 +1,6 @@
 import Header from "@/components/Header/Header";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
-import { geistSans } from "@/lib/fonts";
+import { notoSansHeading, nunitoSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 import "./globals.css";
@@ -13,7 +13,12 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html
       lang="en"
-      className={cn("font-sans", geistSans.variable)}
+      className={cn(
+        "antialiased",
+        "font-sans",
+        nunitoSans.variable,
+        notoSansHeading.variable,
+      )}
       suppressHydrationWarning>
       <body>
         <ThemeProvider
