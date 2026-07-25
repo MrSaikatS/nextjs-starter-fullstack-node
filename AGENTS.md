@@ -6,46 +6,60 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
+## Stack
+
+| Pkg           | Ver                | Note                                                                                                                                                                 |
+| ------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Next.js       | ^16.2              | `reactCompiler: true`, `typedRoutes: true`                                                                                                                           |
+| React         | ^19.2              |                                                                                                                                                                      |
+| TypeScript    | ^5.9               | strict, ESNext module, bundler resolution                                                                                                                            |
+| Prisma        | ^7.9               | Uses `prisma-client` generator (not `prisma-client-js`). Output: `generated/prisma`. Driver adapter: `@prisma/adapter-libsql` for SQLite. Config: `prisma.config.ts` |
+| shadcn/ui     | base-vega style    | Components in `src/components/shadcnui/`. Aliased as `@/components/shadcnui`                                                                                         |
+| Base UI React | ^1.6               | Primitive provider for shadcn components (e.g., `@base-ui/react/button`)                                                                                             |
+| Tailwind CSS  | ^4.3               | `@tailwindcss/postcss` plugin, `tw-animate-css`, `shadcn/tailwind.css`                                                                                               |
+| Zod           | ^4.4               | Schema validation                                                                                                                                                    |
+| env           | @t3-oss/env-nextjs | Split: `src/lib/env/serverEnv.ts` + `clientEnv.ts`                                                                                                                   |
+
+Path aliases: `@/*` → `./src/*`, `@generated/*` → `./generated/*`.
+
 ## Agent behavior
 
-- **Ask questions.** When the request is ambiguous, when there are real implementation choices with tradeoffs, or before any non-obvious / destructive action, use the `question` tool to confirm. Prefer one short batched question over back-and-forth guessing.
-- **Remember new learning.** When you discover something non-obvious about this repo — a gotcha, a convention, a fix, a command that wasn't documented — add it back to this file (or a clearly-scoped section) so future sessions benefit. Keep entries concise and high-signal; delete stale ones.
-- **Use available skills and MCPs.** Before writing code for a task that matches a listed skill (e.g. `prisma-*`, `next-*`, `better-auth-*`, `zod`, etc.), load it with the `skill` tool. And MCPs that are directly relevant to this stack e.g. **`shadcn`** (local; component registry / audit) and **`better-auth`** (remote; auth setup). Use them when the task fits instead of guessing from training data.
+- **Ask questions** when ambiguous or before destructive actions. Prefer one batched question.
+- **Update this file** when you discover non-obvious gotchas, fixes, or conventions.
+- **Use skills + MCPs** before writing code matching `prisma-*`, `next-*`, `better-auth-*`, `zod`, etc. Use `shadcn` MCP for component add/search/audit. Use `better-auth` MCP for auth docs.
 
 ## Verification
 
-- **Primary check**: `bun lint` — runs `next typegen && tsc --noEmit && eslint` (type-check + lint gate).
-- **Secondary / build gate**: `bun run build`. Catches any type/lint issues the lint step might miss (different `tsc` config, production bundling).
-- **Full prod check**: `bun prod` — `prisma generate && next build && next start`. Use before schema or env changes.
+- **Primary**: `bun lint` — runs `next typegen && tsc --noEmit && eslint`
+- **Build gate**: `bun run build` — `prisma generate && next build`
+- **Full prod**: `bun prod` — `prisma generate && next build && next start` (before schema/env changes)
 
-## TypeScript 6.x (current, 7.x deferred)
+## Project structure
 
-- Currently on `^6.0.3` (migrated from 5.9.3). TS 7.0 ships the Go-native compiler but **typescript-eslint does not support it** (API not stable until 7.1). Upstream: typescript-eslint#12518.
-- TS 7.1 expected ~Oct 2026 with stable programmatic API. Revisit then.
-- Migration from 5.x was clean: `strict: true`, `module: "ESNext"`, `moduleResolution: "bundler"` were already set; no `baseUrl` or legacy options.
-
-## ESLint v10 migration — blocked upstream
-
-- Do NOT bump eslint to ^10 until `eslint-plugin-react` ships a v10-compatible release.
-- Latest eslint@9: 9.39.5 (use `^9.39.5`); latest v10: 10.7.0.
-- Runtime crash: `eslint-plugin-react@7.37.5` calls removed `context.getFilename()`.
-- Track: [eslint-plugin-react#3977](https://github.com/jsx-eslint/eslint-plugin-react/issues/3977) — fix PR [#3979](https://github.com/jsx-eslint/eslint-plugin-react/pull/3979) open/unmerged.
-- Also blocked: `eslint-plugin-import@2.32.0` and `eslint-plugin-jsx-a11y@6.10.2` (peer max `^9`).
-- `eslint-config-next` cannot declare v10 support until those plugins do.
-- `eslint-plugin-react-hooks@7.1.1` and `typescript-eslint` already support v10.
-- ESLint 9.x EOL: 2026-08-06. Re-assess when eslint-plugin-react ships a fix.
-
-## Git commits
-
-Use PowerShell here-strings:
-
-```powershell
-git commit -m @"
-<commit message here>
-"@
+```
+src/
+  app/              # App Router (layout.tsx, page.tsx, globals.css)
+  components/
+    Layout/         # Header, ThemeToggleButton
+    Providers/      # ThemeProvider (next-themes)
+    shadcnui/       # shadcn primitives (button.tsx, toast.tsx)
+  hooks/            # Custom hooks (currently empty)
+  lib/
+    dbClient/       # Prisma singleton with libSQL adapter
+    env/            # serverEnv.ts, clientEnv.ts (t3-env)
+    fonts.ts        # next/font (Geist, Inter)
+    types.ts        # LayoutProps
+    utils.ts        # cn() helper (clsx + tailwind-merge)
+  server/           # API routes placeholder (empty)
+generated/prisma/   # Prisma client output (gitignored)
 ```
 
-## Form Patterns
+## Key restrictions
+
+- **ESLint**: Locked at eslint@9.x until `eslint-plugin-react` ships v10 support. Do NOT bump.
+- **TypeScript**: Currently ^5.9. TS 7.0 (Go-native compiler) blocked until typescript-eslint API stabilizes (~Oct 2026). Do not migrate.
+
+## Form patterns
 
 Schemas in `src/lib/zodSchema.ts` — export both schema and `type X = z.infer<typeof xSchema>`.
 
@@ -76,3 +90,13 @@ Each field goes through `Controller`:
 ```
 
 Submit: `<form onSubmit={handleSubmit(handler)} noValidate>`. Button disabled while submitting with icon toggle.
+
+## Git commits
+
+Use PowerShell here-strings:
+
+```powershell
+git commit -m @"
+<commit message here>
+"@
+```
