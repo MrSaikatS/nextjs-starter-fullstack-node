@@ -1,9 +1,10 @@
+import ThemeProvider from "@/components/Providers/ThemeProvider";
 import { geistMono, geistSans, interHeading } from "@/lib/fonts";
 import { LayoutProps } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-export default function RootLayout({ children }: LayoutProps) {
+const RootLayout = ({ children }: LayoutProps) => {
   return (
     <html
       lang="en"
@@ -12,8 +13,18 @@ export default function RootLayout({ children }: LayoutProps) {
         geistSans.variable,
         geistMono.variable,
         interHeading.variable,
-      )}>
-      <body className="">{children}</body>
+      )}
+      suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute={"class"}
+          defaultTheme="dark"
+          enableSystem={false}>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
