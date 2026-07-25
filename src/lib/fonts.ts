@@ -9,7 +9,7 @@ export const interHeading = Inter({
 export const geistSans = Geist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-geist-sans",
+  variable: "--font-sans",
 });
 
 export const geistMono = Geist_Mono({
