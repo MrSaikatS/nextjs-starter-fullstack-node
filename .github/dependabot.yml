@@ -9,6 +9,21 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     # Look for `package.json` and `lock` files in the `root` directory
     directory: "/" # Location of package manifests
-    # Check the npm registry for updates every weekday, Monday to Friday.
+    # Check the npm registry for updates once a week (Sunday), by default on Monday.
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "sunday"
+      time: "09:00"
+      timezone: "Asia/Kolkata"
+    open-pull-requests-limit: 10
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+      development-dependencies:
+        dependency-type: "development"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automated"

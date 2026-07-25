@@ -1,23 +1,18 @@
-import Header from "@/components/Header/Header";
 import ThemeProvider from "@/components/Providers/ThemeProvider";
-import { notoSansHeading, nunitoSans } from "@/lib/fonts";
+import { geistMono, geistSans, interHeading } from "@/lib/fonts";
+import { LayoutProps } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
 import "./globals.css";
 
-type RootLayoutProps = Readonly<{
-  children: ReactNode;
-}>;
-
-const RootLayout = ({ children }: RootLayoutProps) => {
+const RootLayout = ({ children }: LayoutProps) => {
   return (
     <html
       lang="en"
       className={cn(
         "antialiased",
-        "font-sans",
-        nunitoSans.variable,
-        notoSansHeading.variable,
+        geistSans.variable,
+        geistMono.variable,
+        interHeading.variable,
       )}
       suppressHydrationWarning>
       <body>
@@ -25,9 +20,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           attribute={"class"}
           defaultTheme="dark"
           enableSystem={false}>
-          <Header />
-
-          <main className="mx-auto max-w-7xl">{children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>

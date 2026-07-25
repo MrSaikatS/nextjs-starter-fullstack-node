@@ -2,7 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ComponentProps } from "react";
-import ToastProvider from "./ToastProvider";
+import { Toaster } from "../shadcnui/toast";
 
 type ThemeProviderProps = ComponentProps<typeof NextThemesProvider>;
 
@@ -11,7 +11,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
     <NextThemesProvider {...props}>
       {children}
 
-      <ToastProvider />
+      <Toaster timeout={2000} />
     </NextThemesProvider>
   );
 };

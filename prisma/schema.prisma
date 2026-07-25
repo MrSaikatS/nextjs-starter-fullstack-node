@@ -2,11 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
-  runtime  = "nodejs"
+    provider = "prisma-client"
+    output   = "../generated/prisma"
+    // Target runtime environment. Default: nodejs
+    // runtime  = "nodejs"
 }
 
 datasource db {
-  provider = "sqlite"
+    provider = "sqlite"
 }
