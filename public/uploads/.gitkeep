@@ -1,0 +1,7 @@
+# Git Directory Preservation File
+
+This file ensures the `uploads` directory is tracked by Git, as Git does not track empty directories.
+
+## Directory Purpose
+
+The `uploads` directory contains all uploaded files (local) in the application.

@@ -52,7 +52,12 @@ src/
     utils.ts        # cn() helper (clsx + tailwind-merge)
   server/           # API routes placeholder (empty)
 generated/prisma/   # Prisma client output (gitignored)
+public/uploads/     # User uploads (all files ignored except .gitkeep)
 ```
+
+## Gitignore pattern: uploads
+
+`public/uploads/*` + `!public/uploads/.gitkeep` — ignores all uploaded files but keeps empty dir tracked via `.gitkeep`. Do not add `public/uploads/` itself to gitignore.
 
 ## Key restrictions
 
