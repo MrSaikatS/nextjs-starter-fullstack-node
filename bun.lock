@@ -6,6 +6,7 @@
       "name": "nextjs-starter-fullstack-node",
       "dependencies": {
         "@base-ui/react": "^1.6.0",
+        "@hookform/resolvers": "^5.7.1",
         "@prisma/adapter-libsql": "^7.9.0",
         "@prisma/client": "^7.9.0",
         "@t3-oss/env-nextjs": "^0.13.11",
@@ -17,6 +18,7 @@
         "next-themes": "^0.4.6",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
+        "react-hook-form": "^7.85.0",
         "shadcn": "^4.14.1",
         "sharp": "^0.35.3",
         "tailwind-merge": "^3.6.0",
@@ -153,6 +155,8 @@
     "@floating-ui/utils": ["@floating-ui/utils@0.2.12", "", {}, "sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww=="],
 
     "@hono/node-server": ["@hono/node-server@1.19.15", "", { "peerDependencies": { "hono": "^4" } }, "sha512-Za2ai6TLdKjUvnur+eenO6nuYYipVAEhyCAdaV8IRvmU9kK8crOZUSYvIXn72E4f8fJqyAbpcJuTsYYmZp9Deg=="],
+
+    "@hookform/resolvers": ["@hookform/resolvers@5.7.1", "", { "dependencies": { "@standard-schema/utils": "^0.3.0" }, "peerDependencies": { "@sinclair/typebox": ">=0.25.24", "@standard-schema/spec": "^1.0.0", "@typeschema/main": ">=0.13.7", "@vinejs/vine": "^2.0.0 || ^3.0.0 || ^4.0.0", "ajv": "^8.12.0", "ajv-errors": "^3.0.0", "ajv-formats": "^2.1.1", "arktype": "^2.0.0", "ata-validator": "^1.2.0", "class-transformer": ">=0.4.0", "class-validator": ">=0.12.0", "computed-types": "^1.0.0", "effect": "^3.10.3", "fluentvalidation-ts": "^3.0.0", "fp-ts": "^2.7.0", "io-ts": "^2.0.0", "joi": "^17.0.0", "nope-validator": ">=0.12.0", "react-hook-form": "^7.55.0", "superstruct": ">=0.12.0", "typanion": "^3.3.2", "valibot": ">=0.31.0 || ^1.0.0-beta.4 || ^1.0.0-rc", "vest": ">=3.0.0", "yup": "^1.0.0", "zod": "^3.25.0 || ^4.0.0" }, "optionalPeers": ["@sinclair/typebox", "@standard-schema/spec", "@typeschema/main", "@vinejs/vine", "ajv", "ajv-errors", "ajv-formats", "arktype", "ata-validator", "class-transformer", "class-validator", "computed-types", "effect", "fluentvalidation-ts", "fp-ts", "io-ts", "joi", "nope-validator", "superstruct", "typanion", "valibot", "vest", "yup", "zod"] }, "sha512-8wS/P4UDr5sQDe4nFaV51TVyfDPrWgNIXweqG0Bs9Z5LSuzKLb+RQNPvkN2oHM5SRrJyWrVH/F+LOUcFjUyvwQ=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.2", "", { "dependencies": { "@humanfs/types": "^0.15.0" } }, "sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA=="],
 
@@ -339,6 +343,8 @@
     "@sindresorhus/merge-streams": ["@sindresorhus/merge-streams@4.0.0", "", {}, "sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ=="],
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
+
+    "@standard-schema/utils": ["@standard-schema/utils@0.3.0", "", {}, "sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g=="],
 
     "@swc/helpers": ["@swc/helpers@0.5.15", "", { "dependencies": { "tslib": "^2.8.0" } }, "sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g=="],
 
@@ -1281,6 +1287,8 @@
     "react": ["react@19.2.8", "", {}, "sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw=="],
 
     "react-dom": ["react-dom@19.2.8", "", { "dependencies": { "scheduler": "^0.27.0" }, "peerDependencies": { "react": "^19.2.8" } }, "sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ=="],
+
+    "react-hook-form": ["react-hook-form@7.85.0", "", { "peerDependencies": { "react": "^16.8.0 || ^17 || ^18 || ^19" } }, "sha512-U2MTriFXnclmV4rOE20p2DcRFv5WEg3FIcBFOKcOLFHDVvGIMPvLTkTWefUsonmlaVy23khVDxDWym6uJVGOzw=="],
 
     "react-is": ["react-is@16.13.1", "", {}, "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="],
 
