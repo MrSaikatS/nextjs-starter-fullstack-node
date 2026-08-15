@@ -11,7 +11,7 @@ const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
     <NextThemesProvider {...props}>
       {children}
 
-      <Toaster timeout={3000} />
+      <Toaster timeout={2000} />
     </NextThemesProvider>
   );
 };

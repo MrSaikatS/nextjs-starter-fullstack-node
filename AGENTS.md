@@ -12,7 +12,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | ------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Next.js       | ^16.2              | `reactCompiler: true`, `typedRoutes: true`                                                                                                                           |
 | React         | ^19.2              |                                                                                                                                                                      |
-| TypeScript    | ^6.0               | strict, ESNext module, bundler resolution, `types: ["node"]` (TS 6 default is `[]`)                                                                                  |
+| TypeScript    | ^5.9               | strict, ESNext module, bundler resolution                                                                                                                            |
 | Prisma        | ^7.9               | Uses `prisma-client` generator (not `prisma-client-js`). Output: `generated/prisma`. Driver adapter: `@prisma/adapter-libsql` for SQLite. Config: `prisma.config.ts` |
 | shadcn/ui     | base-vega style    | Components in `src/components/shadcnui/`. Aliased as `@/components/shadcnui`                                                                                         |
 | Base UI React | ^1.6               | Primitive provider for shadcn components (e.g., `@base-ui/react/button`)                                                                                             |
@@ -62,7 +62,7 @@ public/uploads/     # User uploads (all files ignored except .gitkeep)
 ## Key restrictions
 
 - **ESLint**: Locked at eslint@9.x until `eslint-plugin-react` ships v10 support. Do NOT bump.
-- **TypeScript**: Currently ^6.0. TS 7.0 (Go-native compiler) blocked until typescript-eslint API stabilizes (~Oct 2026). Do not migrate to 7.x.
+- **TypeScript**: Currently ^5.9. TS 7.0 (Go-native compiler) blocked until typescript-eslint API stabilizes (~Oct 2026). Do not migrate.
 
 ## Form patterns
 
